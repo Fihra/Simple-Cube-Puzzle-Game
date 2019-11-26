@@ -23,13 +23,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(input);
+        //Debug.Log(input);
         input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         if (rb.velocity.magnitude < maxSpeed )
         {
             MoveCharacter(input);
         }
-        
+
+        if (transform.position.y < -2)
+        {
+            Die();
+        }
         
         //moveCharacter(input);
     }
@@ -41,11 +45,32 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.tag);
+        
         if(other.gameObject.tag == "Enemy")
         {
-            Instantiate(deathParticles, transform.position, Quaternion.identity);
-            transform.position = spawn;
+            Die();
         }
+
+        if (other.gameObject.tag == "Goal")
+        {
+            GameManager.CompleteLevel();
+        }
+
+
+    }
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log(other.gameObject.tag);
+    //    if (other.gameObject.tag == "Goal")
+    //    {
+    //        GameManager.CompleteLevel();
+    //    }    
+    //}
+
+    void Die()
+    {
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+        transform.position = spawn;
     }
 }
