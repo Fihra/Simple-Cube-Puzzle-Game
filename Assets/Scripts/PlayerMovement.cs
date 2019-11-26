@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     private Vector3 input;
     private Rigidbody rb;
+
+    private float maxSpeed = 7f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,17 +19,18 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Debug.Log(input);
-        input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        if (rb.velocity.magnitude < maxSpeed )
+        {
+            MoveCharacter(input);
+        }
+        
+        
         //moveCharacter(input);
-    }
-
-    void FixedUpdate()
-    {
-        MoveCharacter(input);
     }
 
     void MoveCharacter(Vector3 direction)
     {
-        rb.AddForce(direction * moveSpeed * Time.deltaTime);
+        rb.AddForce(direction * moveSpeed);
     }
 }
