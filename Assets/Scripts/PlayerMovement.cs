@@ -8,11 +8,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 input;
     private Rigidbody rb;
 
+    public GameObject deathParticles;
+
+    private Vector3 spawn;
+
     private float maxSpeed = 7f;
     // Start is called before the first frame update
     void Start()
     {
-        rb = this.GetComponent<Rigidbody>();
+        spawn = transform.position;
+        rb = GetComponent<Rigidbody>(); 
     }
 
     // Update is called once per frame
@@ -32,5 +37,15 @@ public class PlayerMovement : MonoBehaviour
     void MoveCharacter(Vector3 direction)
     {
         rb.AddForce(direction * moveSpeed);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log(other.gameObject.tag);
+        if(other.gameObject.tag == "Enemy")
+        {
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            transform.position = spawn;
+        }
     }
 }

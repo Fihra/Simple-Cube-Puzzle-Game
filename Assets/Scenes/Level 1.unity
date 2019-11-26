@@ -785,6 +785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 25
+  deathParticles: {fileID: 3917930671010896263, guid: b2b6695aa2b90e24881035383715414a,
+    type: 3}
 --- !u!1 &1735152575
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,6 +850,11 @@ PrefabInstance:
     - target: {fileID: 7707121629126060185, guid: 4e641243d5a2dfa4098bd97f520c4159,
         type: 3}
       propertyPath: m_Name
+      value: Goblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707121629126060185, guid: 4e641243d5a2dfa4098bd97f520c4159,
+        type: 3}
+      propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 4778864447084099335, guid: 4e641243d5a2dfa4098bd97f520c4159,
